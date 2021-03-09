@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
-
+using System.Linq.Expressions;
 
 namespace DataAccess.Concrete.InMemory
 {
@@ -39,16 +39,20 @@ namespace DataAccess.Concrete.InMemory
             }
         }
 
+        public List<Car> Get(Expression<Func<Car, bool>> filter)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Car> GetAll()
         {
             return cars;
             
         }
 
-        public List<Car> GetById(int id)
+        public List<Car> GetAll(Expression<Func<Car, bool>> filter = null)
         {
-            return cars.Where(car => car.Id == id).ToList();
-            
+            throw new NotImplementedException();
         }
 
         public void Update(Car car)
@@ -62,6 +66,11 @@ namespace DataAccess.Concrete.InMemory
                 selectedCar.Description = car.Description;
                 selectedCar.ModelYear = car.ModelYear;
             }
+        }
+
+        Car IEntityRepository<Car>.Get(Expression<Func<Car, bool>> filter)
+        {
+            throw new NotImplementedException();
         }
     }
 }
