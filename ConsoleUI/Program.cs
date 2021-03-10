@@ -9,10 +9,10 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            CarManager carManager = new CarManager(new EFCarDal());
-            foreach (var car in carManager.GetAllCar())
+            CarManager carManager = new CarManager(new EfCarDal());
+            foreach (var car in carManager.carDetailDtos())
             {
-                Console.WriteLine(car.Description);
+                Console.WriteLine(car.BrandName + "-_-" +car.ColorName);
             }
             
 

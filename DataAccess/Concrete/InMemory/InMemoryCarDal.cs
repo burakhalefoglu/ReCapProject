@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using System.Linq.Expressions;
+using Core.DataAccess;
+using Entities.DTOs;
 
 namespace DataAccess.Concrete.InMemory
 {
@@ -28,6 +30,11 @@ namespace DataAccess.Concrete.InMemory
         public void Add(Car car)
         {
             cars.Add(car);
+        }
+
+        public List<CarDetailDto> carDetailDtos()
+        {
+            throw new NotImplementedException();
         }
 
         public void Delete(Car car)

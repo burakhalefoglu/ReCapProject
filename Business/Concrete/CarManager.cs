@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using DataAccess.Abstract;
+using Entities.DTOs;
 using Entity.Concrete;
 using System;
 using System.Collections.Generic;
@@ -56,6 +57,11 @@ namespace Business.Concrete
         public void UpdateCar(Car car)
         {
             carDal.Update(car);
+        }
+
+        public List<CarDetailDto> carDetailDtos()
+        {
+           return carDal.carDetailDtos();
         }
     }
 }
