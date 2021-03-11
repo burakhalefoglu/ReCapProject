@@ -8,10 +8,10 @@ namespace Business.Abstract
 {
     public interface IRentalsService
     {
-        IDataResult<List<Rentals>> GetAllRentals();
-        IResult UpdateRental(Rentals rental);
-        IResult DeleteRental(Rentals car);
-        IResult AddRental(Rentals rental);
-        IDataResult<Rentals> GetById(int id);
+        IDataResult<List<Rental>> GetAllRentals();
+        IResult UpdateRental(Rental rental);
+        IResult DeleteRental(Rental car);
+        IResult AddRental(Rental rental);
+        IDataResult<Rental> GetById(int id);
     }
 }

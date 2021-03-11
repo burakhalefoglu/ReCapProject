@@ -18,31 +18,31 @@ namespace Business.Concrete
             this.rentalDal = rentalDal;
         }
 
-        public IResult AddRental(Rentals rental)
+        public IResult AddRental(Rental rental)
         {
             rentalDal.Add(rental);
             return new SuccessResult();
         }
 
-        public IResult DeleteRental(Rentals rental)
+        public IResult DeleteRental(Rental rental)
         {
             rentalDal.Delete(rental);
             return new SuccessResult();
         }
 
-        public IDataResult<List<Rentals>> GetAllRentals()
+        public IDataResult<List<Rental>> GetAllRentals()
         {
             var result = rentalDal.GetAll();
-            return new SuccessDataResult<List<Rentals>>(result);
+            return new SuccessDataResult<List<Rental>>(result);
         }
 
-        public IDataResult<Rentals> GetById(int id)
+        public IDataResult<Rental> GetById(int id)
         {
             var result = rentalDal.Get(r=> r.CustomerId ==id);
-            return new SuccessDataResult<Rentals>(result);
+            return new SuccessDataResult<Rental>(result);
         }
 
-        public IResult UpdateRental(Rentals rental)
+        public IResult UpdateRental(Rental rental)
         {
             rentalDal.Update(rental);
             return new SuccessResult();
