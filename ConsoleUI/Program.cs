@@ -5,17 +5,25 @@ using System;
 
 namespace ConsoleUI
 {
+    
     class Program
     {
         static void Main(string[] args)
         {
-            CarManager carManager = new CarManager(new EfCarDal());
-            foreach (var car in carManager.carDetailDtos())
-            {
-                Console.WriteLine(car.BrandName + "-_-" +car.ColorName);
-            }
-            
+            VisualCarData();
+          
+        }
 
+
+
+        private static void VisualCarData()
+        {
+            CarManager carManager = new CarManager(new EfCarDal());
+            foreach (var car in carManager.carDetailDtos().Data)
+            {
+                Console.WriteLine(car.BrandName + "-_-" + car.ColorName);
+            }
         }
     }
+
 }

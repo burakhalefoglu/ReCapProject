@@ -1,4 +1,7 @@
 ﻿using Business.Abstract;
+using Business.Constants;
+using Core.Utilities.Results.Abstract;
+using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
 using Entities.DTOs;
 using Entity.Concrete;
@@ -8,6 +11,7 @@ using System.Text;
 
 namespace Business.Concrete
 {
+ 
     public class CarManager : ICarService
     {
         ICarDal carDal;
@@ -17,51 +21,61 @@ namespace Business.Concrete
             this.carDal = carDal;
         }
 
-        public void AddCar(Car car)
+        public IResult AddCar(Car car)
         {
-            if(car.Description.Length<3 || car.DailyPrice<=0)
-            {
-                Console.WriteLine("Validasyon hasatıs.. Eklenemedi...");
-                return;
-            }
+           
 
-            carDal.Add(car);
+           carDal.Add(car);
+            return new SuccessResult();
 
         }
 
-        public void DeleteCar(Car car)
+        public IResult DeleteCar(Car car)
         {
             carDal.Delete(car);
+            return new SuccessResult(Messages.DefaultSuccess);
+
         }
 
-        public List<Car> GetAllCar()
+        public IDataResult<List<Car>> GetAllCar()
         {
-          return  carDal.GetAll();
+            var result = carDal.GetAll();
+
+            return new SuccessDataResult<List<Car>>();
         }
 
 
-        public List<Car> GetCarsByColorId(int id)
+        public IDataResult<List<Car>> GetCarsByColorId(int id)
         {
-            return carDal.GetAll(p=> p.ColorId == id);
+            var result = carDal.GetAll(p=> p.ColorId == id);
+            return new SuccessDataResult<List<Car>>(result);
         }
-        public List<Car> GetCarsByBrandId(int id)
+        public IDataResult<List<Car>> GetCarsByBrandId(int id)
         {
-            return carDal.GetAll(p => p.ColorId == id);
+            var result = carDal.GetAll(p => p.ColorId == id);
+            return new SuccessDataResult<List<Car>>(result, Messages.DefaultSuccess);
+
         }
 
-        public Car GetById(int id)
+        public IDataResult<Car> GetById(int id)
         {
-            return carDal.Get(p=> p.Id == id);
+            var result= carDal.Get(p=> p.Id == id);
+            return new SuccessDataResult<Car>(Messages.DefaultSuccess);
+
         }
 
-        public void UpdateCar(Car car)
+        public IResult UpdateCar(Car car)
         {
             carDal.Update(car);
+            return new SuccessResult(Messages.DefaultSuccess);
+
         }
 
-        public List<CarDetailDto> carDetailDtos()
+        public IDataResult<List<CarDetailDto>> carDetailDtos()
         {
-           return carDal.carDetailDtos();
+           var result = carDal.carDetailDtos();
+            return new SuccessDataResult<List<CarDetailDto>>(result);
+
         }
     }
 }
