@@ -11,9 +11,9 @@ namespace Business.Concrete
 {
     public class UserManager : IUserService
     {
-        IUsersDal usersDal;
+        IUserDal usersDal;
 
-        public UserManager(IUsersDal usersDal)
+        public UserManager(IUserDal usersDal)
         {
             this.usersDal = usersDal;
         }

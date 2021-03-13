@@ -9,11 +9,11 @@ using System.Text;
 
 namespace Business.Concrete
 {
-    public class RentalsManager : IRentalsService
+    public class RentalManager : IRentalService
     {
-        IRentalsDal rentalDal;
+        IRentalDal rentalDal;
 
-        public RentalsManager(IRentalsDal rentalDal)
+        public RentalManager(IRentalDal rentalDal)
         {
             this.rentalDal = rentalDal;
         }

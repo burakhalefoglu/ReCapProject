@@ -26,10 +26,10 @@ namespace ConsoleUI
             };
 
 
-            UserManager userManager = new UserManager(new EfUsersDal());
+            UserManager userManager = new UserManager(new EfUserDal());
             userManager.AddUser(user);
 
-            CustomerManager customerManager = new CustomerManager(new EfCustomersDal());
+            CustomerManager customerManager = new CustomerManager(new EfCustomerDal());
             user.customer = new Customer { UserId = user.Id, CompanyName = "CompanyA" };
             customerManager.AddCustomer(user.customer);
         }

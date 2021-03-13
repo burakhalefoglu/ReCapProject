@@ -11,9 +11,9 @@ namespace Business.Concrete
 {
     public class CustomerManager : ICustomerService
     {
-        ICustomersDal customerDal;
+        ICustomerDal customerDal;
 
-        public CustomerManager(ICustomersDal customerDal)
+        public CustomerManager(ICustomerDal customerDal)
         {
             this.customerDal = customerDal;
         }

@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Business.Abstract
 {
-    public interface IRentalsService
+    public interface IRentalService
     {
         IDataResult<List<Rental>> GetAllRentals();
         IResult UpdateRental(Rental rental);
