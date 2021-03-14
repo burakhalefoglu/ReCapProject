@@ -45,14 +45,14 @@ namespace Business.Concrete
             return new SuccessResult(Messages.DefaultSuccess);
         }
 
-        public IDataResult<List<Customer>> GetAllImages(int CarId)
+        public IDataResult<List<CarImages>> GetAllImages(int CarId)
         {
             IDataResult<CarImages> result = BusinessRules.RunDataResult(CheckImageExist(CarId));
             if (result != null)
-                return (IDataResult<List<Customer>>)result;
-                      
+                return (IDataResult<List<CarImages>>)result;
 
-            return new SuccessDataResult<List<Customer>>(Messages.DefaultSuccess);
+           var Images = _carImagesDal.GetAll();
+            return new SuccessDataResult<List<CarImages>>(Images, Messages.DefaultSuccess);
         }
      
         public IResult UpdateImage(CarImages carImage)
@@ -74,8 +74,8 @@ namespace Business.Concrete
 
         private IDataResult<CarImages> CheckImageExist(int carId)
         {
-            bool CarImagesIsValid = _carImagesDal.GetAll(i => i.CarId == carId).Any();
-            if (!CarImagesIsValid)
+            int CarImagesCount = _carImagesDal.GetAll(i => i.CarId == carId).Count;
+            if (CarImagesCount == 0)
             {
                 return new SuccessDataResult<CarImages>(new CarImages
                 {
