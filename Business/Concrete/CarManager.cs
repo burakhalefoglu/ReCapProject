@@ -1,5 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
@@ -21,6 +23,7 @@ namespace Business.Concrete
             this.carDal = carDal;
         }
 
+        [ValidationAspect(typeof(CarValidator))]
         public IResult AddCar(Car car)
         {
            
@@ -64,6 +67,7 @@ namespace Business.Concrete
 
         }
 
+        [ValidationAspect(typeof(CarValidator))]
         public IResult UpdateCar(Car car)
         {
             carDal.Update(car);
