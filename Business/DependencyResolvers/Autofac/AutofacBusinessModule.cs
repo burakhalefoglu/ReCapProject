@@ -3,6 +3,7 @@ using Autofac.Extras.DynamicProxy;
 using Business.Abstract;
 using Business.Concrete;
 using Castle.DynamicProxy;
+using Core.Utilities.Interceptors;
 using Core.Utilities.Security;
 using Core.Utilities.Security.Jwt;
 using DataAccess.Abstract;
@@ -32,11 +33,11 @@ namespace Business.DependencyResolvers.Autofac
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
 
 
-            //builder.RegisterAssemblyTypes(assembly).AsImplementedInterfaces()
-            //    .EnableInterfaceInterceptors(new ProxyGenerationOptions()
-            //    {
-            //        Selector = new AspectInterceptorSelector()
-            //    }).SingleInstance();
+            builder.RegisterAssemblyTypes(assembly).AsImplementedInterfaces()
+                .EnableInterfaceInterceptors(new ProxyGenerationOptions()
+                {
+                    Selector = new AspectInterceptorSelector()
+                }).SingleInstance();
 
 
         }

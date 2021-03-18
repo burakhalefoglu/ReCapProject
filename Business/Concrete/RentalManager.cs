@@ -13,35 +13,35 @@ namespace Business.Concrete
 {
     public class RentalManager : IRentalService
     {
-        IRentalDal rentalDal;
+        readonly IRentalDal _rentalDal;
 
         public RentalManager(IRentalDal rentalDal)
         {
-            this.rentalDal = rentalDal;
+           _rentalDal = rentalDal;
         }
 
         [ValidationAspect(typeof(RentalValidator))]
         public IResult AddRental(Rental rental)
         {
-            rentalDal.Add(rental);
+            _rentalDal.Add(rental);
             return new SuccessResult();
         }
 
         public IResult DeleteRental(Rental rental)
         {
-            rentalDal.Delete(rental);
+            _rentalDal.Delete(rental);
             return new SuccessResult();
         }
 
         public IDataResult<List<Rental>> GetAllRentals()
         {
-            var result = rentalDal.GetAll();
+            var result = _rentalDal.GetAll();
             return new SuccessDataResult<List<Rental>>(result);
         }
 
         public IDataResult<Rental> GetById(int id)
         {
-            var result = rentalDal.Get(r=> r.CustomerId ==id);
+            var result = _rentalDal.Get(r=> r.CustomerId ==id);
             return new SuccessDataResult<Rental>(result);
         }
 
@@ -49,7 +49,7 @@ namespace Business.Concrete
         [ValidationAspect(typeof(RentalValidator))]
         public IResult UpdateRental(Rental rental)
         {
-            rentalDal.Update(rental);
+            _rentalDal.Update(rental);
             return new SuccessResult();
         }
     }

@@ -12,6 +12,7 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
+            throw new NotSupportedException();
         }
 
 

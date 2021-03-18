@@ -6,7 +6,7 @@ namespace Business.Constants
 {
     public static class Messages
     {
-        public static string DefaultSuccess = "işlem başarılı";
-        public static string DefaultError = "işlem başarısız";
+        public static readonly string DefaultSuccess = "işlem başarılı";
+        public static readonly string DefaultError = "işlem başarısız";
     }
 }

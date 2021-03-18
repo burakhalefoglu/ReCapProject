@@ -5,27 +5,22 @@ using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
 using Entity.Concrete;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Business.Concrete
 {
-    public class CarImagesManager: ICarImagesService
+    public class CarImagesManager : ICarImagesService
     {
-        ICarImagesDal _carImagesDal;
+        readonly ICarImagesDal _carImagesDal;
 
-        public CarImagesManager(ICarImagesDal carImagesDal,
-                                ICarImagesService carImagesService)
+        public CarImagesManager(ICarImagesDal carImagesDal)
         {
             _carImagesDal = carImagesDal;
         }
-
-        public IResult AddImage(CarImages carImage)
+        public IResult AddImage(CarImages carImages)
         {
 
-            IResult result =  BusinessRules.Run(CheckImageCount(carImage.CarId)
+            IResult result = BusinessRules.Run(CheckImageCount(carImages.CarId)
                 );
 
             if (!result.Success)
@@ -33,14 +28,14 @@ namespace Business.Concrete
                 return result;
             }
 
-             _carImagesDal.Add(carImage);
-            
+            _carImagesDal.Add(carImages);
+
             return new SuccessResult(Messages.DefaultSuccess);
         }
 
-        public IResult DeleteImage(CarImages carImage)
+        public IResult DeleteImage(CarImages carImages)
         {
-            _carImagesDal.Delete(carImage);
+            _carImagesDal.Delete(carImages);
 
             return new SuccessResult(Messages.DefaultSuccess);
         }
@@ -51,13 +46,13 @@ namespace Business.Concrete
             if (result != null)
                 return (IDataResult<List<CarImages>>)result;
 
-           var Images = _carImagesDal.GetAll();
+            var Images = _carImagesDal.GetAll();
             return new SuccessDataResult<List<CarImages>>(Images, Messages.DefaultSuccess);
         }
-     
-        public IResult UpdateImage(CarImages carImage)
+
+        public IResult UpdateImage(CarImages carImages)
         {
-            _carImagesDal.Update(carImage);
+            _carImagesDal.Update(carImages);
 
             return new SuccessResult(Messages.DefaultSuccess);
         }
@@ -80,7 +75,7 @@ namespace Business.Concrete
                 return new SuccessDataResult<CarImages>(new CarImages
                 {
                     ImagePath = "abcd"
-                },Messages.DefaultSuccess);
+                }, Messages.DefaultSuccess);
             }
             return null;
         }
