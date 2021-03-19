@@ -2,8 +2,12 @@
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Caching;
+using Core.Aspects.Autofac.Loging;
+using Core.Aspects.Autofac.Performance;
+using Core.Aspects.Autofac.Security;
 using Core.Aspects.Autofac.Transaction;
 using Core.Aspects.Autofac.Validation;
+using Core.CrossCuttingCuncerns.Loging.Log4Net.Loggers;
 using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
@@ -12,6 +16,7 @@ using Entity.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 
 namespace Business.Concrete
 {
@@ -28,7 +33,8 @@ namespace Business.Concrete
         [ValidationAspect(typeof(CarValidator))]
         [CacheRemoveAspect("ICarService.Get")]
         [CacheRemoveAspect("ICategoryService.Get")]
-
+        [AuthorizationAspect("Admin,AddCar")]
+        [LogAspect(typeof(FileLogger))]
         public IResult AddCar(Car car)
         {
            
@@ -38,6 +44,8 @@ namespace Business.Concrete
 
         }
 
+        [AuthorizationAspect("Admin,DeleteCar")]
+        [LogAspect(typeof(FileLogger))]
         public IResult DeleteCar(Car car)
         {
             carDal.Delete(car);
@@ -46,8 +54,12 @@ namespace Business.Concrete
         }
 
         [CacheAspect]
+        [PerformanceAspect(5)]
+        [LogAspect(typeof(DatabaseLogger))]
+
         public IDataResult<List<Car>> GetAllCar()
         {
+            Thread.Sleep(7000);
             var result = carDal.GetAll();
 
             return new SuccessDataResult<List<Car>>(result,Messages.DefaultSuccess);
@@ -81,6 +93,8 @@ namespace Business.Concrete
         [TransactionScopeAspect]
         [ValidationAspect(typeof(CarValidator))]
         [CacheRemoveAspect("ICarService.Get")]
+        [LogAspect(typeof(FileLogger))]
+
         public IResult UpdateCar(Car car)
         {
             carDal.Update(car);
