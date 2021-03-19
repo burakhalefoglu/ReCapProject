@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Core.CrossCuttingCuncerns.Loging
+namespace Core.CrossCuttingConcerns.Logging
 {
     public class LogParameter
     {

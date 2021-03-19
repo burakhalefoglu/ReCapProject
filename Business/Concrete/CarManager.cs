@@ -7,7 +7,7 @@ using Core.Aspects.Autofac.Performance;
 using Core.Aspects.Autofac.Security;
 using Core.Aspects.Autofac.Transaction;
 using Core.Aspects.Autofac.Validation;
-using Core.CrossCuttingCuncerns.Loging.Log4Net.Loggers;
+using Core.CrossCuttingConcerns.Logging.Log4Net.Loggers;
 using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
@@ -53,13 +53,12 @@ namespace Business.Concrete
 
         }
 
-        [CacheAspect]
-        [PerformanceAspect(5)]
-        [LogAspect(typeof(DatabaseLogger))]
+        //[CacheAspect]
+        //[PerformanceAspect(5)]
+        [LogAspect(typeof(FileLogger))]
 
         public IDataResult<List<Car>> GetAllCar()
         {
-            Thread.Sleep(7000);
             var result = carDal.GetAll();
 
             return new SuccessDataResult<List<Car>>(result,Messages.DefaultSuccess);

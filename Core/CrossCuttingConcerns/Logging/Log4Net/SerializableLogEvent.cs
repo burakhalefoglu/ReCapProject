@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Core.CrossCuttingCuncerns.Loging.Log4Net
+namespace Core.CrossCuttingConcerns.Logging.Log4Net
 {
     [Serializable]
     public class SerializableLogEvent
