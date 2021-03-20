@@ -53,12 +53,14 @@ namespace Business.Concrete
 
         }
 
-        //[CacheAspect]
-        //[PerformanceAspect(5)]
+        [CacheAspect]
+        [PerformanceAspect(5)]
         [LogAspect(typeof(FileLogger))]
 
         public IDataResult<List<Car>> GetAllCar()
         {
+            Thread.Sleep(6000);
+
             var result = carDal.GetAll();
 
             return new SuccessDataResult<List<Car>>(result,Messages.DefaultSuccess);

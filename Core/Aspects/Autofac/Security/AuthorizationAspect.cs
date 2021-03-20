@@ -31,7 +31,7 @@ namespace Core.Aspects.Autofac.Security
                     return;
                 }
             }
-            throw new Exception("Messages.AuthorizationDenied");
+            throw new System.Exception("Messages.AuthorizationDenied");
         }
 
     }
